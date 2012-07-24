@@ -1,0 +1,12 @@
+# File Managed by Puppet
+
+define host{
+    hostgroups <%= hostgroups %>
+    host_name  <%= name %>
+    alias      <%= short_alias %>
+    address    <%= ip %>
+    use        <%= use %>
+<% if ! (/^(none|)$/i =~ host_parent) then -%>
+    parents <%= host_parent -%>
+<% end -%>
+}

@@ -26,7 +26,7 @@ define nagios::plugin (
   }
 
   file { "nagios_plugin_${name}":
-    path    => "${nrpe::params::pluginsdir}/${name}",
+    path    => "${nrpe::pluginsdir}/${name}",
     owner   => root,
     group   => root,
     mode    => 0755,

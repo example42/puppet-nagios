@@ -18,8 +18,8 @@ describe 'nagios' do
     it { should contain_package('nagios').with_ensure('1.0.42') }
   end
 
-  describe 'Test standard installation with monitoring and firewalling' do
-    let(:params) { {:monitor => true , :firewall => true, :port => '42', :protocol => 'tcp' } }
+  describe 'Test standard installation with monitoring' do
+    let(:params) { {:monitor => true } }
 
     it { should contain_package('nagios').with_ensure('present') }
     it { should contain_service('nagios').with_ensure('running') }
@@ -29,14 +29,10 @@ describe 'nagios' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]
       content.should == true
     end
-    it 'should place a firewall rule' do
-      content = catalogue.resource('firewall', 'nagios_tcp_42').send(:parameters)[:enable]
-      content.should == true
-    end
   end
 
   describe 'Test decommissioning - absent' do
-    let(:params) { {:absent => true, :monitor => true , :firewall => true, :port => '42', :protocol => 'tcp'} }
+    let(:params) { {:absent => true, :monitor => true } }
 
     it 'should remove Package[nagios]' do should contain_package('nagios').with_ensure('absent') end 
     it 'should stop Service[nagios]' do should contain_service('nagios').with_ensure('stopped') end
@@ -46,14 +42,10 @@ describe 'nagios' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]
       content.should == false
     end
-    it 'should remove a firewall rule' do
-      content = catalogue.resource('firewall', 'nagios_tcp_42').send(:parameters)[:enable]
-      content.should == false
-    end
   end
 
   describe 'Test decommissioning - disable' do
-    let(:params) { {:disable => true, :monitor => true , :firewall => true, :port => '42', :protocol => 'tcp'} }
+    let(:params) { {:disable => true, :monitor => true} }
 
     it { should contain_package('nagios').with_ensure('present') }
     it 'should stop Service[nagios]' do should contain_service('nagios').with_ensure('stopped') end
@@ -63,14 +55,10 @@ describe 'nagios' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]
       content.should == false
     end
-    it 'should remove a firewall rule' do
-      content = catalogue.resource('firewall', 'nagios_tcp_42').send(:parameters)[:enable]
-      content.should == false
-    end
   end
 
   describe 'Test decommissioning - disableboot' do
-    let(:params) { {:disableboot => true, :monitor => true , :firewall => true, :port => '42', :protocol => 'tcp'} }
+    let(:params) { {:disableboot => true, :monitor => true } }
   
     it { should contain_package('nagios').with_ensure('present') }
     it { should_not contain_service('nagios').with_ensure('present') }
@@ -80,10 +68,6 @@ describe 'nagios' do
     it 'should not monitor the process locally' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]
       content.should == false
-    end
-    it 'should keep a firewall rule' do
-      content = catalogue.resource('firewall', 'nagios_tcp_42').send(:parameters)[:enable]
-      content.should == true
     end
   end 
 
@@ -160,25 +144,12 @@ describe 'nagios' do
     end
   end
 
-  describe 'Test Firewall Tools Integration' do
-    let(:params) { {:firewall => true, :firewall_tool => "iptables" , :protocol => "tcp" , :port => "42" } }
-
-    it 'should generate correct firewall define' do
-      content = catalogue.resource('firewall', 'nagios_tcp_42').send(:parameters)[:tool]
-      content.should == "iptables"
-    end
-  end
-
   describe 'Test OldGen Module Set Integration' do
-    let(:params) { {:monitor => "yes" , :monitor_tool => "puppi" , :firewall => "yes" , :firewall_tool => "iptables" , :puppi => "yes" , :port => "42" , :protocol => 'tcp' } }
+    let(:params) { {:monitor => "yes" , :monitor_tool => "puppi" , :puppi => "yes" } }
 
     it 'should generate monitor resources' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:tool]
       content.should == "puppi"
-    end
-    it 'should generate firewall resources' do
-      content = catalogue.resource('firewall', 'nagios_tcp_42').send(:parameters)[:tool]
-      content.should == "iptables"
     end
     it 'should generate puppi resources ' do 
       content = catalogue.resource('puppi::ze', 'nagios').send(:parameters)[:ensure]
@@ -188,8 +159,6 @@ describe 'nagios' do
 
   describe 'Test params lookup' do
     let(:facts) { { :monitor => true , :ipaddress => '10.42.42.42' } }
-    let(:params) { { :port => '42' } }
-
     it 'should honour top scope global vars' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]
       content.should == true
@@ -198,8 +167,6 @@ describe 'nagios' do
 
   describe 'Test params lookup' do
     let(:facts) { { :nagios_monitor => true , :ipaddress => '10.42.42.42' } }
-    let(:params) { { :port => '42' } }
-
     it 'should honour module specific vars' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]
       content.should == true
@@ -208,8 +175,6 @@ describe 'nagios' do
 
   describe 'Test params lookup' do
     let(:facts) { { :monitor => false , :nagios_monitor => true , :ipaddress => '10.42.42.42' } }
-    let(:params) { { :port => '42' } }
-
     it 'should honour top scope module specific over global vars' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]
       content.should == true
@@ -218,7 +183,7 @@ describe 'nagios' do
 
   describe 'Test params lookup' do
     let(:facts) { { :monitor => false , :ipaddress => '10.42.42.42' } }
-    let(:params) { { :monitor => true , :firewall => true, :port => '42' } }
+    let(:params) { { :monitor => true } }
 
     it 'should honour passed params over global vars' do
       content = catalogue.resource('monitor::process', 'nagios_process').send(:parameters)[:enable]

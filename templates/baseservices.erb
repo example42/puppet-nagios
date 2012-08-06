@@ -57,7 +57,7 @@ define service {
 }
 <% end -%>
 
-<% if operatingsystem == "Debian" || operatingsystem == "Ubuntu" -%>
+<% if scope.lookupvar("osfamily") == "Debian" -%>
 ## APT Updates
 define service {
     host_name           <%= host_name %>
@@ -66,4 +66,12 @@ define service {
     use                 <%= use %>
 }
 <% end -%>
-
+<% if scope.lookupvar("osfamily") == "RedHat" -%>
+## Yum Updates
+define service {
+    host_name           <%= host_name %>
+    service_description YUM_Updates
+    check_command       check_nrpe!check_yum!noarg
+    use                 <%= use %>
+}
+<% end -%>

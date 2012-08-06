@@ -1,4 +1,4 @@
-# Define: nagios::plugin
+# Define: pagios::plugin
 #
 # Adds a custom nagios plugin
 #
@@ -11,28 +11,41 @@
 #   source => 'orientdb/nagios-plugins/check_orientdb.sh'
 # }
 define nagios::plugin (
-  $source = ''
+  $source = '',
+  $nrpe_cfg = '',
   $enable = true
   ) {
 
-  include nagios::params
-  include nrpe::params
+  include nrpe
 
   $ensure = bool2ensure( $enable )
 
-  $real_source = $source {
+  $real_source = $source ? {
     ''      => "nagios/nagios-plugins/${name}",
     default => $source,
   }
 
-  file { "nagios_plugin_${name}":
-    path    => "${nrpe::pluginsdir}/${name}",
-    owner   => root,
-    group   => root,
-    mode    => 0755,
-    ensure  => $ensure,
-    source  => "puppet:///modules/${source}",
-    require => Package['nagios-plugins'],
+  if ( $source != 'no' ) {
+    file { "nagios_plugin_${name}":
+      ensure  => $ensure,
+      path    => "${nrpe::pluginsdir}/${name}",
+      owner   => root,
+      group   => root,
+      mode    => 0755,
+      source  => "puppet:///modules/${real_source}",
+      require => Class['nrpe'],
+    }
   }
 
+  if ( $nrpe_cfg != '' ) {
+    file { "nrpe_nagios_plugin_${name}":
+      ensure  => $ensure,
+      path    => "${nrpe::config_dir}/${name}.cfg",
+      owner   => root,
+      group   => root,
+      mode    => 0755,
+      notify  => $nrpe::manage_service_autorestart,
+      content => template($nrpe_cfg),
+    }
+  }
 }

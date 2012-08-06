@@ -1,32 +1,22 @@
 #
 # Class: nagios::plugins
 #
-# Installs nagios plugins. Needed on hosts with nrpe agent
+# Installs Nagios custom plugins used in Example42 modules
 #
 # Usage:
 # include nagios::plugins
 #
 class nagios::plugins {
 
-  # Load the variables used in this module. Check the params.pp file 
-  require nagios::params
-
-  # Basic Package 
-  package { 'nagios-plugins':
-    ensure => present,
-    name   => $nagios::params::packagenameplugins,
-  }
-
-  # Needed only on the nagios server
-  package { 'nagios-plugins-nrpe':
-    ensure => present,
-    name   => $nagios::params::packagenamenrpeplugin,
-  }
-
   # Include Extra custom Plugins (Provided via Puppet)
-  if ( $nagios::params::plugins != 'no') { 
-    nagios::plugin { 'check_mount': } 
-    nagios::plugin { 'check_ageandcontent.pl': } 
+  nagios::plugin { 'check_mount': } 
+  nagios::plugin { 'check_disks':
+    source   => 'no' ,
+    nrpe_cfg => 'nagios/nrpe_cfg/nrpe-check_disk.cfg.erb',
   }
+  nagios::plugin { 'check_yum':
+    nrpe_cfg => 'nagios/nrpe_cfg/nrpe-check_yum.cfg.erb',
+  }
+  nagios::plugin { 'check_ageandcontent.pl': } 
 
 }

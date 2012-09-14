@@ -12,7 +12,11 @@ class nagios::target {
   # This variable defines where nagios automatically generated 
   # files are places. This MUST be the same of $::nagios::customconfigdir
   # HINT: Do not mess with default path names...
-  $customconfigdir = '/etc/nagios/auto.d'
+
+  $customconfigdir = $::operatingsystem ? {
+    /(?i:Debian|Ubuntu|Mint)/ => '/etc/nagios3/auto.d',
+    default                   => '/etc/nagios/auto.d',
+  }
 
   # TODO: Find a smarter solution that doesn't requre TopScope Variables
   $magic_tag = get_magicvar($::nagios_grouplogic)

@@ -422,7 +422,7 @@ class nagios (
     user { "www-data":
       groups  => 'nagios',
       require => [ Package['nagios'] ],
-	}
+    }
   }
 
 }

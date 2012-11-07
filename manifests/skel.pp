@@ -179,4 +179,13 @@ class nagios::skel {
     require => Package['nagios'],
   }
 
+  # nagios group needs permission to write in /var/lib/nagios3/rw
+  if $::operatingsystem =~ /(?i:Debian|Ubuntu|Mint)/ {
+    file { '/var/lib/nagios3/rw':
+      ensure  => directory,
+      mode    => '0770',
+      require => Package["nagios"],
+    }
+  }
+
 }

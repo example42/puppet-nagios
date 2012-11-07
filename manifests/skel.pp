@@ -1,7 +1,7 @@
 # Class: nagios::skel
 #
 # Some extra stuff necessary for Example42 nagios implementation
-# Needed to make things go smoothly 
+# Needed to make things go smoothly
 #
 # Usage:
 # Autoincluded by nagios class
@@ -47,7 +47,7 @@ class nagios::skel {
     owner   => $nagios::configfile_owner,
     group   => $nagios::configfile_group,
     require => File['nagios_configdir'],
-    recurse => true, 
+    recurse => true,
     purge   => true,
     force   => true,
   }
@@ -176,7 +176,7 @@ class nagios::skel {
     owner   => $nagios::config_file_owner,
     group   => $nagios::config_file_group,
     content => template('nagios/htpasswd'),
-    require => Package["nagios"],
+    require => Package['nagios'],
   }
 
 }

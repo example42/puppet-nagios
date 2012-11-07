@@ -1,6 +1,7 @@
 # Define nagios::baseservices
 #
-# Use this to define Nagios basic service objects that will be applied to all nodes
+# Use this to define Nagios basic service objects that will be 
+# used for to all nodes
 # All local disks, memory, cpu, local users...
 # It's automatically loaded in nagios::target
 #
@@ -16,7 +17,7 @@ define nagios::baseservices (
 
   include nagios::target
 
-  case $::nagios_filemode { 
+  case $::nagios_filemode {
 
     'concat': {
       if $ensure == 'present' {
@@ -40,15 +41,15 @@ define nagios::baseservices (
 
     default: {
       @@file { "${nagios::target::customconfigdir}/services/${host_name}-00-baseservices.cfg":
+        ensure  => $ensure,
         mode    => '0644',
         owner   => 'root',
         group   => 'root',
-        ensure  => $ensure,
         notify  => Service['nagios'],
         content => template( $template ),
         tag     => "nagios_check_${nagios::target::magic_tag}",
       }
-    } 
+    }
 
   }
 

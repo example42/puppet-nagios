@@ -351,7 +351,7 @@ class nagios (
   include nagios::target
   # Collects all the stored configs regarding nagios
   # Host/Service Checks aggregation policy is based on $::nagios_filemode
-  case $::nagios_filemode { 
+  case $::nagios_filemode {
     'concat': {
       # One file per host with all the relevant services in auto.d/hosts
       # Concatenated with puppetlabs-concat

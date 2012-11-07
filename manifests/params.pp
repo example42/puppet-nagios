@@ -133,7 +133,7 @@ class nagios::params {
   }
 
   $data_dir = $::operatingsystem ? {
-    /(?i:RedHat|Scientific|Centos)/ => '/var/log/nagios', 
+    /(?i:RedHat|Scientific|Centos)/ => '/var/log/nagios',
     default                         => '/var/lib/nagios',
   }
 

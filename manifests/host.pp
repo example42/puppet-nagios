@@ -7,7 +7,7 @@
 # You can decide what method to use to create resources on the
 # nagios server with the $::nagios_filemode top scope variable
 # NOTE: THIS MUST BE the same for all nodes
-# 
+#
 # Usage:
 # nagios::host { "$fqdn": }
 #
@@ -23,7 +23,7 @@ define nagios::host (
 
   include nagios::target
 
-  case $::nagios_filemode { 
+  case $::nagios_filemode {
 
     'concat': {
       if $ensure == 'present' {
@@ -45,11 +45,11 @@ define nagios::host (
 
     'pupmod-concat': {
       if $ensure == 'present' {
-        @@concat_build { "nagios-${host_name}":
+        @@concat_build { "nagios-${::hostname}":
           target => "${nagios::target::customconfigdir}/hosts/${name}.cfg",
           order  => ['*.tmp'],
         }
-        @@concat_fragment { "nagios-${host_name}+200_${name}.tmp":
+        @@concat_fragment { "nagios-${::hostname}+200_${name}.tmp":
           content => template( $template ),
         }
       }
@@ -57,15 +57,15 @@ define nagios::host (
 
     default: {
       @@file { "${nagios::target::customconfigdir}/hosts/${name}.cfg":
+        ensure  => $ensure,
         mode    => '0644',
         owner   => 'root',
         group   => 'root',
-        ensure  => $ensure,
         notify  => Service['nagios'],
         content => template( $template ),
         tag     => "nagios_check_${nagios::target::magic_tag}",
       }
-    } 
+    }
 
   }
 

@@ -17,7 +17,7 @@ define nagios::service (
   $ensure              = 'present'
   ) {
 
-  # Autoinclude the target host class 
+  # Autoinclude the target host class
   # (each service must have a defined host)
   include nagios::target
 
@@ -32,7 +32,7 @@ define nagios::service (
     default => $service_description,
   }
 
-  case $::nagios_filemode { 
+  case $::nagios_filemode {
 
     'concat': {
       if $ensure == 'present' {
@@ -56,15 +56,15 @@ define nagios::service (
 
     default: {
       @@file { "${nagios::target::customconfigdir}/services/${host_name}-${name}.cfg":
+        ensure  => $ensure,
         mode    => '0644',
         owner   => 'root',
         group   => 'root',
-        ensure  => $ensure,
         notify  => Service['nagios'],
         content => template( $template ),
         tag     => "nagios_check_${nagios::target::magic_tag}",
       }
-    } 
+    }
 
   }
 

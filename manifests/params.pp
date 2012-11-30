@@ -23,55 +23,55 @@ class nagios::params {
   $use_ssl = true
 
   $cachedir = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => '/var/log/nagios',
-    /(?i:Debian|Ubuntu|Mint)/              => '/var/cache/nagios3',
-    default                                => '/var/cache/nagios',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/var/log/nagios',
+    /(?i:Debian|Ubuntu|Mint)/                           => '/var/cache/nagios3',
+    default                                             => '/var/cache/nagios',
   }
 
   $resourcefile = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => '/etc/nagios/private/resource.cfg',
-    /(?i:Debian|Ubuntu|Mint)/              => '/etc/nagios3/resource.cfg',
-    default                                => '/etc/nagios/resource.cfg',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/etc/nagios/private/resource.cfg',
+    /(?i:Debian|Ubuntu|Mint)/                           => '/etc/nagios3/resource.cfg',
+    default                                             => '/etc/nagios/resource.cfg',
   }
 
   $statusfile = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => '/var/log/nagios/status.dat',
-    /(?i:Debian|Ubuntu|Mint)/              => '/var/cache/nagios3/status.dat',
-    default                                => '/var/lib/nagios/status.dat',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/var/log/nagios/status.dat',
+    /(?i:Debian|Ubuntu|Mint)/                           => '/var/cache/nagios3/status.dat',
+    default                                             => '/var/lib/nagios/status.dat',
   }
 
   $commandfile = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => '/var/spool/nagios/cmd',
-    /(?i:Debian|Ubuntu|Mint)/              => '/var/lib/nagios3/rw/nagios.cmd',
-    default                                => '/var/lib/nagios/rw/nagios.cmd',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/var/spool/nagios/cmd',
+    /(?i:Debian|Ubuntu|Mint)/                           => '/var/lib/nagios3/rw/nagios.cmd',
+    default                                             => '/var/lib/nagios/rw/nagios.cmd',
   }
 
   $resultpath = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => '/var/log/nagios/spool/checkresults',
-    /(?i:Debian|Ubuntu|Mint)/              => '/var/lib/nagios3/spool/checkresults',
-    default                                => '/var/lib/nagios/spool/checkresults',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/var/log/nagios/spool/checkresults',
+    /(?i:Debian|Ubuntu|Mint)/                           => '/var/lib/nagios3/spool/checkresults',
+    default                                             => '/var/lib/nagios/spool/checkresults',
   }
 
   $retentionfile = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => '/var/log/nagios/retention.dat',
-    /(?i:Debian|Ubuntu|Mint)/              => '/var/lib/nagios3/retention.dat',
-    default                                => '/var/lib/nagios/retention.dat',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/var/log/nagios/retention.dat',
+    /(?i:Debian|Ubuntu|Mint)/                           => '/var/lib/nagios3/retention.dat',
+    default                                             => '/var/lib/nagios/retention.dat',
   }
 
   $p1file  = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => '/usr/sbin/p1.pl',
-    /(?i:Debian|Ubuntu|Mint)/              => '/usr/lib/nagios3/p1.pl',
-    default                                => '/usr/lib/nagios/p1.pl',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/usr/sbin/p1.pl',
+    /(?i:Debian|Ubuntu|Mint)/                           => '/usr/lib/nagios3/p1.pl',
+    default                                             => '/usr/lib/nagios/p1.pl',
   }
 
   $nrpepluginpackage = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => 'nagios-plugins-nrpe',
-    default                                => 'nagios-nrpe-plugin',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => 'nagios-plugins-nrpe',
+    default                                             => 'nagios-nrpe-plugin',
   }
 
   $pluginspackage = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora)/ => 'nagios-plugins-all',
-    default                                => 'nagios-plugins',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => 'nagios-plugins-all',
+    default                                             => 'nagios-plugins',
   }
 
   $htpasswdfile = $::operatingsystem ? {
@@ -121,18 +121,18 @@ class nagios::params {
   }
 
   $config_file_mode = $::operatingsystem ? {
-    /(?i:RedHat|Scientific|Centos)/ => '0664',
-    default                         => '0644',
+    /(?i:RedHat|Scientific|Centos|Amazon|Linux)/ => '0664',
+    default                                      => '0644',
   }
 
   $config_file_owner = $::operatingsystem ? {
-    /(?i:RedHat|Scientific|Centos)/ => 'nagios',
-    default                         => 'root',
+    /(?i:RedHat|Scientific|Centos|Amazon|Linux)/ => 'nagios',
+    default                                      => 'root',
   }
 
   $config_file_group = $::operatingsystem ? {
-    /(?i:RedHat|Scientific|Centos)/ => 'nagios',
-    default                         => 'root',
+    /(?i:RedHat|Scientific|Centos|Amazon|Linux)/ => 'nagios',
+    default                                      => 'root',
   }
 
   $config_file_init = $::operatingsystem ? {
@@ -141,9 +141,9 @@ class nagios::params {
   }
 
   $pid_file = $::operatingsystem ? {
-    /(?i:RedHat|Scientific|Centos)/ => '/var/run/nagios.pid',
-    /(?i:Debian|Ubuntu|Mint)/       => '/var/run/nagios3/nagios3.pid',
-    default                         => '/var/run/nagios/nagios.pid',
+    /(?i:RedHat|Scientific|Centos|Amazon|Linux)/ => '/var/run/nagios.pid',
+    /(?i:Debian|Ubuntu|Mint)/                    => '/var/run/nagios3/nagios3.pid',
+    default                                      => '/var/run/nagios/nagios.pid',
   }
 
   $data_dir = $::operatingsystem ? {

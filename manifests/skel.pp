@@ -10,14 +10,14 @@ class nagios::skel {
 
   include nagios
 
-  file { 'nagios.cmd':
-    ensure  => $nagios::manage_file,
-    path    => $nagios::commandfile,
-    mode    => '0660',
-    owner   => $nagios::process_user,
-    group   => $nagios::process_user,
-    require => Package['nagios'],
-  }
+#  file { 'nagios.cmd':
+#    ensure  => $nagios::manage_file,
+#    path    => $nagios::commandfile,
+#    mode    => '0660',
+#    owner   => $nagios::process_user,
+#    group   => $nagios::process_user,
+#    require => Package['nagios'],
+#  }
 
   file { 'nagios_configdir':
     ensure  => directory,

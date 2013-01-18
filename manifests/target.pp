@@ -13,13 +13,13 @@ class nagios::target {
   # files are places. This MUST be the same of $::nagios::customconfigdir
   # HINT: Do not mess with default path names...
 
-  $customconfigdir = $::nagios_customconfigdir ? {
+  $customconfigdir = $::nagios::customconfigdir ? {
     ''      => '/etc/nagios/auto.d',
-    default => $::nagios_customconfigdir,
+    default => $::nagios::customconfigdir,
   }
 
   # TODO: Find a smarter solution that doesn't requre TopScope Variables
-  $magic_tag = get_magicvar($::nagios_grouplogic)
+  $magic_tag = get_magicvar($::nagios::grouplogic)
 
   nagios::host { $fqdn: 
     use => 'generic-host',

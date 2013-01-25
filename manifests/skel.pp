@@ -32,8 +32,8 @@ class nagios::skel {
     ensure  => directory,
     path    => "${nagios::customconfigdir}/hosts",
     mode    => '0755',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
     recurse => true,
     purge   => true,
@@ -44,8 +44,8 @@ class nagios::skel {
     ensure  => directory,
     path    => "${nagios::customconfigdir}/services",
     mode    => '0755',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
     recurse => true,
     purge   => true,
@@ -56,8 +56,8 @@ class nagios::skel {
     ensure  => directory,
     path    => "${nagios::customconfigdir}/commands",
     mode    => '0755',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
   }
 
@@ -65,8 +65,8 @@ class nagios::skel {
     ensure  => directory,
     path    => "${nagios::customconfigdir}/settings",
     mode    => '0755',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
   }
 
@@ -74,8 +74,8 @@ class nagios::skel {
     ensure  => directory,
     path    => "${nagios::customconfigdir}/hostgroups",
     mode    => '0755',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
   }
 
@@ -83,8 +83,8 @@ class nagios::skel {
     ensure  => directory,
     path    => "${nagios::customconfigdir}/extra",
     mode    => '0755',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
   }
 
@@ -92,8 +92,8 @@ class nagios::skel {
     ensure  => directory,
     path    => "${nagios::config_dir}/modules",
     mode    => '0755',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
   }
 
@@ -102,8 +102,8 @@ class nagios::skel {
     ensure  => $nagios::manage_file,
     path    => "${nagios::customconfigdir}/commands/general.cfg",
     mode    => '0644',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir_commands'],
     content => template('nagios/commands/general.cfg'),
   }
@@ -112,8 +112,8 @@ class nagios::skel {
     ensure  => $nagios::manage_file,
     path    => "${nagios::customconfigdir}/commands/extra.cfg",
     mode    => '0644',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir_commands'],
     content => template('nagios/commands/extra.cfg'),
   }
@@ -122,8 +122,8 @@ class nagios::skel {
     ensure  => $nagios::manage_file,
     path    => "${nagios::customconfigdir}/commands/special.cfg",
     mode    => '0644',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir_commands'],
     content => template('nagios/commands/special.cfg'),
   }
@@ -132,8 +132,8 @@ class nagios::skel {
     ensure  => $nagios::manage_file,
     path    => "${nagios::customconfigdir}/settings/contacts.cfg",
     mode    => '0644',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir_settings'],
     content => template('nagios/settings/contacts.cfg'),
   }
@@ -142,8 +142,8 @@ class nagios::skel {
     ensure  => $nagios::manage_file,
     path    => "${nagios::customconfigdir}/settings/timeperiods.cfg",
     mode    => '0644',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir_settings'],
     content => template('nagios/settings/timeperiods.cfg'),
   }
@@ -152,8 +152,8 @@ class nagios::skel {
     ensure  => $nagios::manage_file,
     path    => "${nagios::customconfigdir}/settings/templates.cfg",
     mode    => '0644',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir_settings'],
     content => template('nagios/settings/templates.cfg'),
   }
@@ -162,8 +162,8 @@ class nagios::skel {
     ensure  => $nagios::manage_file,
     path    => "${nagios::customconfigdir}/hostgroups/all.cfg",
     mode    => '0644',
-    owner   => $nagios::configfile_owner,
-    group   => $nagios::configfile_group,
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
     require => File['nagios_configdir_hostgroups'],
     content => template('nagios/hostgroups/all.cfg'),
   }

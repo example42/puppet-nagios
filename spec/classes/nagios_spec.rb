@@ -110,16 +110,12 @@ describe 'nagios' do
     end
   end
 
-  describe 'Test service autorestart', :broken => true do
-    it 'should automatically restart the service, by default' do
-      content = catalogue.resource('file', 'nagios.conf').send(:parameters)[:notify]
-      content.should == 'Service[nagios]{:name=>"nagios"}'
-    end
+  describe 'Test service autorestart' do
+    it { should contain_file('nagios.conf').with_notify('Service[nagios]') }
   end
 
   describe 'Test service autorestart' do
     let(:params) { {:service_autorestart => "no" } }
-
     it 'should not automatically restart the service, when service_autorestart => false' do
       content = catalogue.resource('file', 'nagios.conf').send(:parameters)[:notify]
       content.should be_nil

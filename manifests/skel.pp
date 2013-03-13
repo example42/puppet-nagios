@@ -184,6 +184,8 @@ class nagios::skel {
     file { '/var/lib/nagios3/rw':
       ensure  => directory,
       mode    => '0770',
+      owner   => $nagios::process_user,
+      group   => $nagios::process_user,
       require => Package["nagios"],
     }
   }

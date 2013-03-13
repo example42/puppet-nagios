@@ -147,16 +147,18 @@ class nagios::params {
   }
 
   $data_dir = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/       => '/var/lib/nagios3',
-    default                         => '/var/lib/nagios',
+    /(?i:Debian|Ubuntu|Mint)/ => '/var/lib/nagios3',
+    default                   => '/var/lib/nagios',
   }
 
   $log_dir = $::operatingsystem ? {
-    default => '/var/log/nagios',
+    /(?i:Debian|Ubuntu|Mint)/ => '/var/log/nagios3',
+    default                   => '/var/log/nagios',
   }
 
   $log_file = $::operatingsystem ? {
-    default => '/var/log/nagios/nagios.log',
+    /(?i:Debian|Ubuntu|Mint)/ => '/var/log/nagios3/nagios.log',
+    default                   => '/var/log/nagios/nagios.log',
   }
 
   # General Settings

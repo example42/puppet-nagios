@@ -8,7 +8,7 @@
 # This is an exported resource.
 #
 define nagios::baseservices (
-  $host_name           = $fqdn,
+  $host_name           = $::fqdn,
   $service_description = '',
   $use                 = 'generic-service',
   $template            = 'nagios/baseservices.erb',

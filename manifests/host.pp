@@ -12,8 +12,8 @@
 # nagios::host { "$fqdn": }
 #
 define nagios::host (
-  $ip            = $fqdn,
-  $short_alias   = $fqdn,
+  $ip            = $::fqdn,
+  $short_alias   = $::fqdn,
   $use           = 'generic-host',
   $host_parent   = '',
   $ensure        = 'present',

@@ -9,7 +9,7 @@
 # NOTE: THIS MUST BE the same for all nodes
 #
 define nagios::service (
-  $host_name           = $fqdn,
+  $host_name           = $::fqdn,
   $check_command       = '',
   $service_description = '',
   $use                 = 'generic-service',

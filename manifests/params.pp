@@ -14,6 +14,11 @@
 #
 class nagios::params {
 
+  $install_prerequisites = true
+
+  # Default nagiosadmin password is 'example42'
+  $nagiosadmin_password = 'B5dPQYYjf.jjA'
+
   $grouplogic = ''
 
   $check_external_commands = true

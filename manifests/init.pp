@@ -5,6 +5,36 @@
 #
 # == Parameters
 #
+# Module specific parameters
+#
+# [*install_prerequisites*]
+#
+# [*nagiosadmin_password*]
+#
+# [*check_external_commands*]
+#
+# [*plugins*]
+#
+# [*use_ssl*]
+#
+# [*cachedir*]
+#
+# [*resourcefile*]
+#
+# [*statusfile*]
+#
+# [*commandfile*]
+#
+# [*resultpath*]
+#
+# [*retentionfile*]
+#
+# [*p1file*]
+#
+# [*nrpepluginpackage*]
+#
+# [*htpasswdfile*]
+#
 # Standard class parameters
 # Define the general class behaviour and customizations
 #
@@ -174,6 +204,8 @@
 #
 class nagios (
   # $grouplogic          = params_lookup( 'grouplogic' ),
+  $install_prerequisites = params_lookup('install_prerequisites'),
+  $nagiosadmin_password  = params_lookup('nagiosadmin_password'),
   $check_external_commands = params_lookup( 'check_external_commands' ),
   $plugins             = params_lookup( 'plugins' ),
   $use_ssl             = params_lookup( 'use_ssl' ),
@@ -222,6 +254,7 @@ class nagios (
   $log_file            = params_lookup( 'log_file' )
   ) inherits nagios::params {
 
+  $bool_install_prerequisites = any2bool($install_prerequisites)
   $bool_check_external_commands=any2bool($check_external_commands)
   $bool_source_dir_purge=any2bool($source_dir_purge)
   $bool_service_autorestart=any2bool($service_autorestart)
@@ -425,4 +458,8 @@ class nagios (
     }
   }
 
+  ### Prerequisites
+  if $nagios::bool_install_prerequisites {
+    include nagios::prerequisites
+  }
 }

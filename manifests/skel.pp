@@ -10,15 +10,6 @@ class nagios::skel {
 
   include nagios
 
-#  file { 'nagios.cmd':
-#    ensure  => $nagios::manage_file,
-#    path    => $nagios::commandfile,
-#    mode    => '0660',
-#    owner   => $nagios::process_user,
-#    group   => $nagios::process_user,
-#    require => Package['nagios'],
-#  }
-
   file { 'nagios_configdir':
     ensure  => directory,
     path    => $nagios::customconfigdir,
@@ -166,17 +157,6 @@ class nagios::skel {
     group   => $nagios::config_file_group,
     require => File['nagios_configdir_hostgroups'],
     content => template('nagios/hostgroups/all.cfg'),
-  }
-
-  # Htpasswd file (Defaultuser nagiosadmin:example42)
-  file { 'nagios_htpasswd':
-    ensure  => $nagios::manage_file,
-    path    => $nagios::htpasswdfile,
-    mode    => '0644',
-    owner   => $nagios::config_file_owner,
-    group   => $nagios::config_file_group,
-    content => template('nagios/htpasswd'),
-    require => Package['nagios'],
   }
 
   # nagios group needs permission to write in /var/lib/nagios3/rw

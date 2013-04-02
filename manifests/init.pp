@@ -10,6 +10,8 @@
 # [*install_prerequisites*]
 #
 # [*nagiosadmin_password*]
+#  Crypted password for nagiosadmin user.
+#  Default (in cleartext): 'example42'
 #
 # [*check_external_commands*]
 #

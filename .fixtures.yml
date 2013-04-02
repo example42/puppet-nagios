@@ -6,6 +6,7 @@ fixtures:
     "iptables": "git://github.com/example42/puppet-iptables.git"
     "concat": "git://github.com/example42/puppet-concat.git"
     "nrpe": "git://github.com/example42/puppet-nrpe.git"
+    "apache": "git://github.com/example42/puppet-apache.git"
   symlinks:
     "nagios": "#{source_dir}"
 

@@ -1,0 +1,12 @@
+# File Managed by Puppet
+define contact{
+        contact_name                    <%= @name %>
+        alias                           <%= @alias %>
+        service_notification_period     <%= @service_notification_period %>
+        host_notification_period        <%= @host_notification_period %>
+        service_notification_options    <%= @service_notification_options %>
+        host_notification_options       <%= @host_notification_options %>
+        service_notification_commands   <%= @service_notification_commands %>
+        host_notification_commands      <%= @host_notification_commands %>
+        email                           <%= @email %>
+        }

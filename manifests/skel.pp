@@ -119,8 +119,10 @@ class nagios::skel {
     content => template('nagios/commands/special.cfg'),
   }
 
+  # Temporary removal of old default contact file
+  # Contacts are now managed via defines
   file { 'nagios_contacts.cfg':
-    ensure  => $nagios::manage_file,
+    ensure  => absent,
     path    => "${nagios::customconfigdir}/settings/contacts.cfg",
     mode    => '0644',
     owner   => $nagios::config_file_owner,
@@ -128,6 +130,13 @@ class nagios::skel {
     require => File['nagios_configdir_settings'],
     content => template('nagios/settings/contacts.cfg'),
   }
+
+  nagios::contact { 'root': }
+  nagios::contactgroup { 'admins':
+    alias   => 'Nagios Administrators',
+    members => 'root',
+  }
+
 
   file { 'nagios_timeperiods.cfg':
     ensure  => $nagios::manage_file,

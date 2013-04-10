@@ -18,6 +18,8 @@ class nagios::params {
 
   # Default nagiosadmin password is 'example42'
   $nagiosadmin_password = 'B5dPQYYjf.jjA'
+  $nagiosadmin_email = 'root@localhost'
+  $nagiosadmins_members = 'nagiosadmin'
 
   $grouplogic = ''
 

@@ -131,10 +131,12 @@ class nagios::skel {
     content => template('nagios/settings/contacts.cfg'),
   }
 
-  nagios::contact { 'root': }
+  nagios::contact { 'nagiosadmin':
+    email   => $nagios::nagiosadmin_email,
+  }
   nagios::contactgroup { 'admins':
     alias   => 'Nagios Administrators',
-    members => 'root',
+    members => $nagios::nagiosadmins_members,
   }
 
 

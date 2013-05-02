@@ -27,7 +27,7 @@ class nagios::skel {
     group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
     recurse => true,
-    purge   => true,
+    purge   => $nagios::bool_source_dir_purge,
     force   => true,
   }
 
@@ -39,7 +39,7 @@ class nagios::skel {
     group   => $nagios::config_file_group,
     require => File['nagios_configdir'],
     recurse => true,
-    purge   => true,
+    purge   => $nagios::bool_source_dir_purge,
     force   => true,
   }
 

@@ -21,8 +21,10 @@ class nagios::target {
   # TODO: Find a smarter solution that doesn't requre TopScope Variables
   $magic_tag = get_magicvar($::nagios_grouplogic)
 
-  nagios::host { $::fqdn: 
-    use => 'generic-host',
+  if !defined(Nagios::Host[$::fqdn]) {
+    nagios::host { $::fqdn:
+      use => 'generic-host',
+    }
   }
 
   nagios::baseservices { $::fqdn:

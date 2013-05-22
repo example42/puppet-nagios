@@ -13,6 +13,7 @@ define nagios::contact (
   $service_notification_commands  = 'notify-service-by-email',
   $host_notification_commands     = 'notify-host-by-email',
   $email                          = 'root@localhost',
+  $pager                          = '',
   $ensure                         = 'present' ) {
 
   include nagios

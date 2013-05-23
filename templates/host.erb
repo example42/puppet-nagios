@@ -7,6 +7,6 @@ define host{
     address    <%= ip %>
     use        <%= use %>
 <% if ! (/^(none|)$/i =~ host_parent) then -%>
-    parents <%= host_parent -%>
+    parents <%= host_parent %>
 <% end -%>
 }

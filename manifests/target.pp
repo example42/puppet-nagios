@@ -9,6 +9,16 @@
 #
 class nagios::target {
 
+  case $nagios::target_host_options {
+    undef:   { $target_host_options = {} }
+    default: { $target_host_options = $nagios::target_host_options }
+  }
+
+  case $target_host_options['host_parent'] {
+    undef:   { $target_host_options['host_parent'] = '' }
+    default: { }
+  }
+
   # This variable defines where nagios automatically generated 
   # files are places. This MUST be the same of $::nagios::customconfigdir
   # HINT: Do not mess with default path names...
@@ -24,6 +34,7 @@ class nagios::target {
   if !defined(Nagios::Host[$::fqdn]) {
     nagios::host { $::fqdn:
       use => 'generic-host',
+      host_parent => $target_host_options['host_parent']
     }
   }
 

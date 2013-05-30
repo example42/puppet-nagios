@@ -263,7 +263,8 @@ class nagios (
   $pid_file                = params_lookup( 'pid_file' ),
   $data_dir                = params_lookup( 'data_dir' ),
   $log_dir                 = params_lookup( 'log_dir' ),
-  $log_file                = params_lookup( 'log_file' )
+  $log_file                = params_lookup( 'log_file' ),
+  $target_host_options     = params_lookup( 'target_host_options' ),
   ) inherits nagios::params {
 
   $bool_install_prerequisites = any2bool($install_prerequisites)

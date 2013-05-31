@@ -392,6 +392,22 @@ class nagios (
     }
   }
 
+  case $nagios::target_host_options {
+    undef:   { }
+    default: {
+      if !defined(Nagios::Host[$::fqdn]) {
+        case $nagios::target_host_options['host_parent'] {
+            undef:   { $nagios::target_host_options['host_parent'] = '' }
+            default: { }
+        }
+        nagios::host { $::fqdn:
+          use => 'generic-host',
+          host_parent => $nagios::target_host_options['host_parent']
+        }
+      }
+    }
+  }
+
   # Include configuration directories and files
   include nagios::skel
   include nagios::target

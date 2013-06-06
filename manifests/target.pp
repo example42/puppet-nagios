@@ -22,8 +22,13 @@ class nagios::target {
   $magic_tag = get_magicvar($::nagios_grouplogic)
 
   if !defined(Nagios::Host[$::fqdn]) {
+    $host_template = $::nagios_host_template ? {
+      ''      => 'nagios/host.erb',
+      default => $::nagios_host_template,
+    }
     nagios::host { $::fqdn:
-      use => 'generic-host',
+      use      => 'generic-host',
+      template => $host_template,
     }
   }
 

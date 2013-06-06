@@ -263,8 +263,7 @@ class nagios (
   $pid_file                = params_lookup( 'pid_file' ),
   $data_dir                = params_lookup( 'data_dir' ),
   $log_dir                 = params_lookup( 'log_dir' ),
-  $log_file                = params_lookup( 'log_file' ),
-  $target_host_options     = params_lookup( 'target_host_options' )
+  $log_file                = params_lookup( 'log_file' )
   ) inherits nagios::params {
 
   $bool_install_prerequisites = any2bool($install_prerequisites)
@@ -389,22 +388,6 @@ class nagios (
       purge   => $nagios::bool_source_dir_purge,
       replace => $nagios::manage_file_replace,
       audit   => $nagios::manage_audit,
-    }
-  }
-
-  case $nagios::target_host_options {
-    undef:   { }
-    default: {
-      if !defined(Nagios::Host[$::fqdn]) {
-        case $nagios::target_host_options['host_parent'] {
-            undef:   { $nagios::target_host_options['host_parent'] = '' }
-            default: { }
-        }
-        nagios::host { $::fqdn:
-          use => 'generic-host',
-          host_parent => $nagios::target_host_options['host_parent']
-        }
-      }
     }
   }
 

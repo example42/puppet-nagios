@@ -9,7 +9,7 @@
 #
 class nagios::target {
 
-  # This variable defines where nagios automatically generated 
+  # This variable defines where nagios automatically generated
   # files are places. This MUST be the same of $::nagios::customconfigdir
   # HINT: Do not mess with default path names...
 
@@ -39,7 +39,7 @@ class nagios::target {
   include nagios::plugins
 
 # TODO: Automatic hostgroup management is broken. We'll review it later
-#  nagios::hostgroup { "${nagios::params::hostgroups}-$fqdn": 
+#  nagios::hostgroup { "${nagios::params::hostgroups}-$fqdn":
 #    hostgroup => "${nagios::params::hostgroups}",
 #  }
 

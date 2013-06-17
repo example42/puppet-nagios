@@ -29,9 +29,9 @@ define nagios::plugin (
     file { "nagios_plugin_${name}":
       ensure  => $ensure,
       path    => "${nrpe::pluginsdir}/${name}",
-      owner   => root,
-      group   => root,
-      mode    => 0755,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
       source  => "puppet:///modules/${real_source}",
       require => Class['nrpe'],
     }
@@ -41,9 +41,9 @@ define nagios::plugin (
     file { "nrpe_nagios_plugin_${name}":
       ensure  => $ensure,
       path    => "${nrpe::config_dir}/${name}.cfg",
-      owner   => root,
-      group   => root,
-      mode    => 0755,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
       notify  => $nrpe::manage_service_autorestart,
       content => template($nrpe_cfg),
     }

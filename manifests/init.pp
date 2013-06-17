@@ -464,7 +464,7 @@ class nagios (
   ### Adding www-data to group nagios.
   ### www-data needs permission to nagios.cmd when executing external commands.
   if $::operatingsystem =~ /(?i:Debian|Ubuntu|Mint)/ {
-    user { "www-data":
+    user { 'www-data':
       groups  => 'nagios',
       require => [ Package['nagios'] ],
     }

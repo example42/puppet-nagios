@@ -32,8 +32,13 @@ class nagios::target {
     }
   }
 
+  $baseservices_template = $::nagios_baseservices_template ? {
+    ''      => 'nagios/baseservices.erb',
+    default => $::nagios_baseservices_template,
+  }
   nagios::baseservices { $::fqdn:
-    use => 'generic-service',
+    use      => 'generic-service',
+    template => $baseservices_template,
   }
 
   include nagios::plugins

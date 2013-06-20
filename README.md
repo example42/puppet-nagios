@@ -77,6 +77,18 @@ For detailed info about the logic and usage patterns of Example42 modules check 
           my_class => 'nagios::example42',
         }
 
+* Optional baseservices template
+
+        $nagios_baseservices_template = 'example42/nagios/baseservices.erb' <--- Place at top of site.pp
+
+* Optional host config template
+
+        $nagios_host_template = 'example42/nagios/host.erb' <--- Place at top of site.pp
+
+* Optional check_disks plugin config template
+
+        $nagios_check_disks_nrpe_cfg = 'example42/nagios/nrpe_cfg/nrpe-check_disk.cfg.erb'  <--- Place at top of site.pp
+
 
 ## USAGE - Example42 extensions management 
 * Activate puppi (recommended, but disabled by default)

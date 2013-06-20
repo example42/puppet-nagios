@@ -77,11 +77,11 @@ For detailed info about the logic and usage patterns of Example42 modules check 
           my_class => 'nagios::example42',
         }
 
-* Optional Base Services template
+* Optional baseservices template
 
         $nagios_baseservices_template = 'example42/nagios/baseservices.erb' <--- Place at top of site.pp
 
-* Optional Host Config template
+* Optional host config template
 
         $nagios_host_template = 'example42/nagios/host.erb' <--- Place at top of site.pp
 

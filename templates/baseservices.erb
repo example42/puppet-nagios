@@ -1,4 +1,4 @@
-
+<% if !scope.lookupvar("nrpe::absent") and !scope.lookupvar("nrpe::disable") and scope.lookupvar("nrpe::on") -%>
 # Load Average
 define service {
     host_name           <%= host_name %>
@@ -66,7 +66,7 @@ define service {
     use                 <%= use %>
 }
 <% end -%>
-<% if scope.lookupvar("osfamily") == "RedHat" -%>
+<% if scope.lookupvar("osfamily") == "RedHat" and scope.lookupvar("nrpe::enable_check_yum") -%> 
 ## Yum Updates
 define service {
     host_name           <%= host_name %>
@@ -75,3 +75,4 @@ define service {
     use                 <%= use %>
 }
 <% end -%>
+<% end -%> 

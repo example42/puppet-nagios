@@ -41,8 +41,6 @@ class nagios::target {
     template => $baseservices_template,
   }
 
-  include nagios::plugins
-
 # TODO: Automatic hostgroup management is broken. We'll review it later
 #  nagios::hostgroup { "${nagios::params::hostgroups}-$fqdn": 
 #    hostgroup => "${nagios::params::hostgroups}",

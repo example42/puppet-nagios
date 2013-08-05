@@ -161,7 +161,7 @@ class nagios::skel {
   }
 
   file { 'nagios_hostgroup_all.cfg':
-    ensure  => $nagios::manage_file,
+    ensure  => absent,
     path    => "${nagios::customconfigdir}/hostgroups/all.cfg",
     mode    => '0644',
     owner   => $nagios::config_file_owner,

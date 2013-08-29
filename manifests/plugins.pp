@@ -14,7 +14,7 @@ class nagios::plugins {
   }
 
   # Include Extra custom Plugins (Provided via Puppet)
-  nagios::plugin { 'check_mount': } 
+  nagios::plugin { 'check_mount': }
   nagios::plugin { 'check_disks':
     source   => 'no' ,
     nrpe_cfg => $nagios_check_disks_nrpe_cfg,
@@ -22,6 +22,6 @@ class nagios::plugins {
   nagios::plugin { 'check_yum':
     nrpe_cfg => 'nagios/nrpe_cfg/nrpe-check_yum.cfg.erb',
   }
-  nagios::plugin { 'check_ageandcontent.pl': } 
+  nagios::plugin { 'check_ageandcontent.pl': }
 
 }

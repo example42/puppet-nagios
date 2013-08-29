@@ -177,7 +177,7 @@ class nagios::skel {
       mode    => '0770',
       owner   => $nagios::process_user,
       group   => $nagios::process_user,
-      require => Package["nagios"],
+      require => Package['nagios'],
     }
   }
 

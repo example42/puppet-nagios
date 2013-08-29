@@ -1,6 +1,6 @@
 # Define nagios::baseservices
 #
-# Use this to define Nagios basic service objects that will be 
+# Use this to define Nagios basic service objects that will be
 # used for to all nodes
 # All local disks, memory, cpu, local users...
 # It's automatically loaded in nagios::target

@@ -46,12 +46,12 @@ For detailed info about the logic and usage patterns of Example42 modules check 
 
 * Debian (and derivatives) users must set the top scope variable `nagios_customconfigdir` to point to the Nagios configuration directory. At the moment, this directory is not parameterized based on operating system
 
-        $nagios_customconfigdir = '/etc/nagios3/auto.d' <--- Place at top of site.pp
+        $::nagios_customconfigdir = '/etc/nagios3/auto.d' # Top Scope Variable
         class { 'nagios': }
 
 
 ## USAGE - Overrides and Customizations
-* Use custom sources for main config file 
+* Use custom sources for main config file
 
         class { 'nagios':
           source => [ "puppet:///modules/lab42/nagios/nagios.conf-${hostname}" , "puppet:///modules/lab42/nagios/nagios.conf" ], 

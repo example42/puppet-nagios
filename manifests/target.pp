@@ -9,8 +9,8 @@
 #
 class nagios::target {
 
-  # This variable defines where nagios automatically generated
-  # files are places. This MUST be the same of $::nagios::customconfigdir
+  # Here is defined where on nagios server check files are saved
+  # This MUST be the same of $::nagios::customconfigdir
   # HINT: Do not mess with default path names...
 
   $customconfigdir = $::nagios_customconfigdir ? {

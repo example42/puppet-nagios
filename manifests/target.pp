@@ -8,6 +8,7 @@
 # include nagios::target
 #
 class nagios::target {
+  # # #
   # Here is defined where on nagios server check files are saved
   # This MUST be the same of $::nagios::customconfigdir
   # HINT: Do not mess with default path names...

@@ -2,7 +2,11 @@
 #
 # Use this to define nagios command objects
 #
-define nagios::command ( $command_line  = '' , $ensure = 'present' ) {
+define nagios::command (
+  $command_line  = '',
+  $options       = '',
+  $ensure        = 'present'
+) {
 
   file { "${nagios::customconfigdir}/commands/${name}.cfg":
     ensure  => $ensure,

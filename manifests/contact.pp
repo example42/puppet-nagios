@@ -14,6 +14,7 @@ define nagios::contact (
   $host_notification_commands     = 'notify-host-by-email',
   $email                          = 'root@localhost',
   $pager                          = '',
+  $options                        = '',
   $ensure                         = 'present' ) {
 
   include nagios

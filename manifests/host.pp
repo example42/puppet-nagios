@@ -18,6 +18,7 @@ define nagios::host (
   $host_parent   = '',
   $ensure        = 'present',
   $template      = 'nagios/host.erb',
+  $options       = '',
   $hostgroups    = 'all'
   ) {
 

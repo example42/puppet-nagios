@@ -11,9 +11,10 @@
 #   source => 'orientdb/nagios-plugins/check_orientdb.sh'
 # }
 define nagios::plugin (
-  $source = '',
+  $source   = '',
   $nrpe_cfg = '',
-  $enable = true
+  $options  = '',
+  $enable   = true
   ) {
 
   include nrpe

@@ -170,6 +170,16 @@ class nagios::skel {
     content => template('nagios/hostgroups/all.cfg'),
   }
 
+  file { 'nagios_host_localhost.cfg':
+    ensure  => $nagios::manage_file,
+    path    => "${nagios::customconfigdir}/hosts/localhost.cfg",
+    mode    => '0644',
+    owner   => $nagios::config_file_owner,
+    group   => $nagios::config_file_group,
+    require => File['nagios_configdir_hosts'],
+    content => template('nagios/hosts/localhost.cfg'),
+  }
+
   # nagios group needs permission to write in /var/lib/nagios3/rw
   if $::operatingsystem =~ /(?i:Debian|Ubuntu|Mint)/ {
     file { '/var/lib/nagios3/rw':
@@ -177,7 +187,7 @@ class nagios::skel {
       mode    => '0770',
       owner   => $nagios::process_user,
       group   => $nagios::process_user,
-      require => Package["nagios"],
+      require => Package['nagios'],
     }
   }
 

@@ -4,7 +4,7 @@
 #
 define nagios::command (
   $command_line  = '',
-  $options       = '',
+  $options_hash  = {},
   $ensure        = 'present'
 ) {
 

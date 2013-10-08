@@ -7,7 +7,7 @@
 define nagios::contactgroup (
   $members,
   $alias                          = $name,
-  $options                        = '',
+  $options_hash                   = {},
   $ensure                         = 'present'
 ) {
 

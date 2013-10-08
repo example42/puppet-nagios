@@ -12,7 +12,7 @@ define nagios::baseservices (
   $service_description = '',
   $use                 = 'generic-service',
   $template            = 'nagios/baseservices.erb',
-  $options             = '',
+  $options_hash        = {},
   $ensure              = 'present'
   ) {
 

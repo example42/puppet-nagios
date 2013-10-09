@@ -14,6 +14,7 @@ define nagios::service (
   $service_description = '',
   $use                 = 'generic-service',
   $template            = 'nagios/service.erb',
+  $options_hash        = {},
   $ensure              = 'present'
   ) {
 

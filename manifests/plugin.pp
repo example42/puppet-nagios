@@ -28,13 +28,17 @@ define nagios::plugin (
 
   if ( $source != 'no' ) {
     file { "nagios_plugin_${name}":
-      ensure  => $ensure,
-      path    => "${nrpe::pluginsdir}/${name}",
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      source  => "puppet:///modules/${real_source}",
-      require => Class['nrpe'],
+      ensure   => $ensure,
+      path     => "${nrpe::pluginsdir}/${name}",
+      owner    => 'root',
+      group    => 'root',
+      mode     => '0755',
+      source   => "puppet:///modules/${real_source}",
+      require  => Class['nrpe'],
+      seluser  => 'system_u',
+      selrole  => 'object_r',
+      seltype  => 'nagios_system_plugin_exec_t',
+      selrange => 's0',
     }
   }
 

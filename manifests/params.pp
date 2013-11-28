@@ -14,6 +14,9 @@
 #
 class nagios::params {
 
+  $manual_dir_source = undef
+  $manual_dir_purge = false
+
   $install_prerequisites = true
 
   # Default nagiosadmin password is 'example42'

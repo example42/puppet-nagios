@@ -7,6 +7,15 @@
 #
 # Module specific parameters
 #
+# [*manual_dir_source*]
+#   If defined, the /etc/nagios/auto.d/manual directory is built
+#   recursively from the specified source
+#
+# [*manual_dir_purge*]
+#   If set to true (default false) the any existing file on 
+#   /etc/nagios/auto.d/manual not present on the source
+#   path specified in manual_dir_source is deleted
+#
 # [*install_prerequisites*]
 #
 # [*nagiosadmin_password*]
@@ -214,6 +223,8 @@
 #
 class nagios (
   # $grouplogic            = params_lookup( 'grouplogic' ),
+  $manual_dir_source       = params_lookup('manual_dir_source'),
+  $manual_dir_purge        = params_lookup('manual_dir_purge'),
   $install_prerequisites   = params_lookup('install_prerequisites'),
   $nagiosadmin_password    = params_lookup('nagiosadmin_password'),
   $nagiosadmin_email       = params_lookup('nagiosadmin_email'),
@@ -277,6 +288,7 @@ class nagios (
   $bool_puppi=any2bool($puppi)
   $bool_debug=any2bool($debug)
   $bool_audit_only=any2bool($audit_only)
+  $bool_manual_dir_purge=any2bool($manual_dir_purge)
   $customconfigdir = "${config_dir}/auto.d"
 
   ### Definition of some variables used in the module

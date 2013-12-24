@@ -7,6 +7,7 @@ fixtures:
     "concat": "https://github.com/example42/puppet-concat.git"
     "nrpe": "https://github.com/example42/puppet-nrpe.git"
     "apache": "https://github.com/example42/puppet-apache.git"
+    "stdlib": "https://github.com/puppetlabs/puppetlabs-stdlib.git"
   symlinks:
     "nagios": "#{source_dir}"
 

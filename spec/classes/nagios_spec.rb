@@ -187,5 +187,33 @@ describe 'nagios' do
     end
   end
 
+  describe 'Test htpasswdfile correct' do
+    before(:each) do
+      @htpasswd_resource = catalogue.resource('apache::htpasswd', 'nagiosadmin')
+    end
+
+    context 'on Debian-like systems' do
+      let(:facts) { { :osfamily => 'Debian' } }
+
+      it 'should set the apache htpasswd in the correct file' do
+        @htpasswd_resource[:htpasswd_file].should eq('/etc/nagios3/htpasswd.users')
+      end
+    end
+
+    context 'on Redhat-like systems' do
+      let(:facts) { { :osfamily => 'Redhat' } }
+
+      it 'should set the apache htpasswd in the correct file' do
+        @htpasswd_resource[:htpasswd_file].should eq('/etc/nagios/passwd')
+      end
+    end
+
+    context 'on non-Redhat and non-Debian systems' do
+      it 'should set the apache htpasswd in the correct file' do
+        @htpasswd_resource[:htpasswd_file].should eq('/etc/nagios/htpasswd.users')
+      end
+    end
+  end
+
 end
 

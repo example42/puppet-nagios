@@ -29,6 +29,7 @@ class nagios::skel {
     recurse => true,
     purge   => $nagios::bool_source_dir_purge,
     force   => true,
+    notify  => $nagios::manage_service_autorestart,
   }
 
   file { 'nagios_configdir_services':
@@ -41,6 +42,7 @@ class nagios::skel {
     recurse => true,
     purge   => $nagios::bool_source_dir_purge,
     force   => true,
+    notify  => $nagios::manage_service_autorestart,
   }
 
   file { 'nagios_configdir_commands':

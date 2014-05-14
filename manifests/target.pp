@@ -15,6 +15,7 @@ class nagios::target {
 
   $customconfigdir = $::nagios_customconfigdir ? {
     ''      => '/etc/nagios/auto.d',
+    undef   => '/etc/nagios/auto.d',
     default => $::nagios_customconfigdir,
   }
 

@@ -51,7 +51,7 @@ class nagios::params {
   }
 
   $commandfile = $::operatingsystem ? {
-    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/var/spool/nagios/cmd',
+    /(?i:RedHat|Centos|Scientific|Fedora|Amazon|Linux)/ => '/var/spool/nagios/cmd/nagios.cmd',
     /(?i:Debian|Ubuntu|Mint)/                           => '/var/lib/nagios3/rw/nagios.cmd',
     default                                             => '/var/lib/nagios/rw/nagios.cmd',
   }

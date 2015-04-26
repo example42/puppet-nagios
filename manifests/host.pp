@@ -29,10 +29,10 @@ define nagios::host (
     'concat': {
       if $ensure == 'present' {
         @@concat { "${nagios::target::customconfigdir}/hosts/${name}.cfg":
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0644',
-          tag     => "nagios_check_${nagios::target::magic_tag}",
+          owner => 'root',
+          group => 'root',
+          mode  => '0644',
+          tag   => "nagios_check_${nagios::target::magic_tag}",
         }
         @@concat::fragment { "nagios-${name}":
           target  => "${nagios::target::customconfigdir}/hosts/${name}.cfg",

@@ -15,10 +15,10 @@ define nagios::hostgroup (
     'concat': {
       if $ensure == 'present' {
         @@concat { "${nagios::target::customconfigdir}/hostsgroups/${name}.cfg":
-          owner   => 'root',
-          group   => 'root',
-          mode    => '0644',
-          tag     => "nagios_check_${nagios::target::magic_tag}",
+          owner => 'root',
+          group => 'root',
+          mode  => '0644',
+          tag   => "nagios_check_${nagios::target::magic_tag}",
         }
         @@concat::fragment { "nagios-${name}":
           target  => "${nagios::target::customconfigdir}/hostsgroups/${name}.cfg",

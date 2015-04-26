@@ -366,12 +366,12 @@ class nagios (
   }
 
   service { 'nagios':
-    ensure     => $nagios::manage_service_ensure,
-    name       => $nagios::service,
-    enable     => $nagios::manage_service_enable,
-    hasstatus  => $nagios::service_status,
-    pattern    => $nagios::process,
-    require    => [ Package['nagios'] , Class['nagios::skel'] ] ,
+    ensure    => $nagios::manage_service_ensure,
+    name      => $nagios::service,
+    enable    => $nagios::manage_service_enable,
+    hasstatus => $nagios::service_status,
+    pattern   => $nagios::process,
+    require   => [ Package['nagios'] , Class['nagios::skel'] ] ,
   }
 
   file { 'nagios.conf':

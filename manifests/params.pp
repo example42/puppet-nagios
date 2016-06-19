@@ -84,11 +84,11 @@ class nagios::params {
     default                                             => 'nagios-plugins',
   }
 
-  $htpasswdfile = $::operatingsystem ? {
-    /(?i:Debian|Ubuntu|Mint)/ => '/etc/nagios3/htpasswd.users',
-    default                   => '/etc/nagios/htpasswd.users',
+  $htpasswdfile = $::osfamily ? {
+    'Debian' => '/etc/nagios3/htpasswd.users',
+    'RedHat' => '/etc/nagios/passwd',
+    default  => '/etc/nagios/htpasswd.users',
   }
-
 
   ### Application related parameters
 
